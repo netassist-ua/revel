@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/revel/revel"
+	"github.com/netassist-ua/revel"
 	"github.com/robfig/go-cache"
 )
 

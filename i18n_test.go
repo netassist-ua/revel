@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/revel/config"
+	"github.com/netassist-ua/revel-config"
 )
 
 const (

@@ -18,7 +18,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/revel/config"
+	"github.com/netassist-ua/revel-config"
 )
 
 const (
@@ -272,6 +272,62 @@ func fsWalk(fname string, linkName string, walkFn filepath.WalkFunc) error {
 	}
 
 	return filepath.Walk(fname, fsWalkFunc)
+}
+
+//hasPathPrefix checks if path lies in the path prefix respecting path boundaries
+func hasPathPrefix(path, prefix string, checkSymLinks bool) (bool, error) {
+	var err error = nil
+
+	if checkSymLinks {
+		//Evaluate symlinks
+		path, err = filepath.EvalSymlinks(path)
+		if err != nil {
+			return false, err
+		}
+	} else {
+		//Just clean the path
+		path = filepath.Clean(path)
+	}
+	prefix_components := splitPath(prefix)
+	path_components := splitPath(path)
+
+	if len(prefix_components) > len(path_components) {
+		return false, nil
+	}
+
+	for i, comp := range prefix_components {
+		if path_components[i] != comp {
+			return false, nil
+		}
+	}
+	return true, nil
+}
+
+//splitPath splits path into sections by path separators
+func splitPath(path string) []string {
+	var s_val string = ""
+	sections := []string{}
+	end := false
+	//Traverse the path
+
+	for i, c := range path {
+		if os.IsPathSeparator(uint8(c)) {
+			sections = append(sections, s_val)
+			s_val = ""
+			if i+1 == len(path) {
+				end = true
+			}
+		} else {
+			s_val += string(c)
+		}
+	}
+
+	//Add last section if path does not end with separator
+	if !end {
+		sections = append(sections, s_val)
+	}
+
+	return sections
 }
 
 func init() {

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/revel/revel"
+	"github.com/netassist-ua/revel"
 )
 
 func init() {

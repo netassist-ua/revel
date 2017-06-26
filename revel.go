@@ -15,13 +15,13 @@ import (
 	"strings"
 
 	"github.com/agtorre/gocolorize"
-	"github.com/revel/config"
+	"github.com/netassist-ua/revel-config"
 	"sort"
 )
 
 const (
 	// RevelImportPath Revel framework import path
-	RevelImportPath = "github.com/revel/revel"
+	RevelImportPath = "github.com/netassist-ua/revel"
 )
 const (
 	// Called when templates are going to be refreshed (receivers are registered template engines added to the template.engine conf option)
@@ -56,7 +56,7 @@ var (
 	DevMode bool   // if true, RunMode is a development mode.
 
 	// Revel installation details
-	RevelPath string // e.g. "$GOPATH/src/github.com/revel/revel"
+	RevelPath string // e.g. "$GOPATH/src/github.com/netassist-ua/revel"
 
 	// Where to look for templates
 	// Ordered by priority. (Earlier paths take precedence over later paths.)
@@ -411,7 +411,7 @@ func addModule(name, importPath, modulePath string) {
 
 	// Hack: There is presently no way for the testrunner module to add the
 	// "test" subdirectory to the CodePaths.  So this does it instead.
-	if importPath == Config.StringDefault("module.testrunner", "github.com/revel/modules/testrunner") {
+	if importPath == Config.StringDefault("module.testrunner", "github.com/netassist-ua/revel-modules/testrunner") {
 		INFO.Print("Found testrunner module, adding `tests` path ", filepath.Join(BasePath, "tests"))
 		CodePaths = append(CodePaths, filepath.Join(BasePath, "tests"))
 	}
