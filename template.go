@@ -7,7 +7,9 @@ package revel
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"fmt"
+	"html/template"
 	"io"
 	"io/ioutil"
 	"os"
@@ -337,6 +339,7 @@ func ParseTemplateError(err error) (templateName string, line int, description s
 func (loader *TemplateLoader) Template(name string) (tmpl Template, err error) {
 	return loader.TemplateLang(name, "")
 }
+
 // Template returns the Template with the given name.  The name is the template's path
 // relative to a template loader root.
 //
